@@ -11,13 +11,13 @@ export interface IBook { //o I na frente vem para representar uma interface
 
 //Exemplo de type
 
-// type BookType = {
-//     id: number;
-//     title: string;
-//     author: string;
-//     description: string;
-//     pullished_date: Date;
-//     price: Number;
-// };
+type BookType = {
+    id: number;
+    title: string;
+    author: string;
+    description: string;
+    pullished_date: Date;
+    price: Number;
+};
 
-// type FantasyBookType = BookType & {fantasyType: "high fantasy"};
+type FantasyBookType = BookType & {fantasyType: "high fantasy"};

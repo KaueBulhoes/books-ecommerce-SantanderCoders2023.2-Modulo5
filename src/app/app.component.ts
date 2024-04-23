@@ -20,18 +20,22 @@ export class AppComponent {
   title = "it's me you're looking for";
   addedBooksList: IBook[] = [];
 
+  findOrAddBook(book: IBook){
+    for(let i=0; i<this.addedBooksList.length; i++){
+      if(book.id === this.addedBooksList[i].id){ 
+        this.addedBooksList[i].totalAddedToCart++;
+        return;
+      }
+    }
+
+    book.totalAddedToCart = 1;
+    this.addedBooksList.push(book);
+  }
+
   addBookToCart(book: IBook) {
     console.log("Deu bom, cria! O livro vai ser adicionado ao carrinho")
 
-    findBook(book: IBook){
-      for (let i=0; i<this.addedBooksList.length; i++) {
-        if (book.id === this.addedBooksList[i].id){
-          this.addedBooksList[i].totalAddedToCart++;
-          return;
-        }
-      }
-    }
-    this.addedBooksList.push(book);
+    this.findOrAddBook(book);
     //... serve para desestruturar o elemento, irá criar um array a partir do array, serve para que o ngOnChanges possa entender a mudança
     this.addedBooksList = [...this.addedBooksList];
 

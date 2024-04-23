@@ -8,7 +8,7 @@ export interface IBook { //o I na frente vem para representar uma interface
     pullished_date: Date;
     price: number;
     totalInStock: number;
-    totalAddedToCart?: number;
+    totalAddedToCart: number;
 };
 
 //Exemplo de type

@@ -1,6 +1,6 @@
 <mat-list>
     @for(book of addedBooksList; track book.id){
-    <mat-list-item><p>{{book.title}}</p></mat-list-item>
+    <mat-list-item><p>{{book.title}} | {{book.totalAddedToCart}} </p></mat-list-item>
     <mat-divider></mat-divider>
     }@empty {
     <p>Carrinho Vazio</p>

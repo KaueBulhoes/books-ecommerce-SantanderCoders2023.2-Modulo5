@@ -25,6 +25,7 @@ export class BooksCatalogComponent {
       "pullished_date": new Date ("1988-08-29"),
       "price": 59.99,
       "totalInStock": 20,
+      "totalAddedToCart": 0
     },
     {
       "id":2,
@@ -34,6 +35,7 @@ export class BooksCatalogComponent {
       "pullished_date": new Date ("1988-08-29"),
       "price": 59.99,
       "totalInStock": 20,
+      "totalAddedToCart": 0
     },
     {
       "id":3,
@@ -43,6 +45,7 @@ export class BooksCatalogComponent {
       "pullished_date":new Date ("1988-08-29"),
       "price": 59.99,
       "totalInStock": 20,
+      "totalAddedToCart": 0
     },
     {
       "id":4,
@@ -52,6 +55,7 @@ export class BooksCatalogComponent {
       "pullished_date":new Date ("1988-08-29"),
       "price": 59.99,
       "totalInStock": 20,
+      "totalAddedToCart": 0
     },
   ]
 

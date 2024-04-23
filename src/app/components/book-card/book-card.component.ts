@@ -15,7 +15,7 @@ import { NgIf } from '@angular/common';
 //implements é usado para implementar a função dentro do método
 export class BookCardComponent implements OnInit {
   @Input() book ? : IBook;  //com a ? eu digo que essa propriedade pode ser IBook ou undefiened
-  @Output() addBookToCart: EventEmitter<any> = new EventEmitter;
+  @Output() addBookToCart: EventEmitter<void> = new EventEmitter; //1° passo
 
   constructor(){
     //console.log(this.book); //resultado será undefined
@@ -28,6 +28,7 @@ export class BookCardComponent implements OnInit {
   }
 
   addToShoppingCart(){
+    this.addBookToCart.emit(); //4°Passo
     console.log("Book Added to Cart")
   }
 

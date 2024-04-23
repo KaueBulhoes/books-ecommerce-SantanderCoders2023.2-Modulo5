@@ -20,8 +20,7 @@
 
 <!--Sintaxe Nova-->
 @for(book of booksList; track book.id){
-    <app-book-card [book]="book"></app-book-card>
-    
+    <app-book-card [book]="book" (addBookToCart)="warnAboutAddBookToCart(book)"></app-book-card> <!--3° passo-->
 } @empty {
     <p>A lista de livros está vazia</p>
     

@@ -6,7 +6,9 @@ export interface IBook { //o I na frente vem para representar uma interface
     author: string;
     description: string;
     pullished_date: Date;
-    price: Number;
+    price: number;
+    totalInStock: number;
+    totalAddedToCart?: number;
 };
 
 //Exemplo de type

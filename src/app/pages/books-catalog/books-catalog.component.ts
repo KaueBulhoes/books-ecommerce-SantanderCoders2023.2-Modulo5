@@ -60,8 +60,8 @@ export class BooksCatalogComponent {
   ]
 
   warnAboutAddBookToCart(book: IBook){
-    console.log("Opa, clicou no botão de compra"); //2° passo
-    console.log(book);
+    // console.log("Opa, clicou no botão de compra"); //2° passo
+    // console.log(book);
     this.addBookToCart.emit(book);
   }
 }

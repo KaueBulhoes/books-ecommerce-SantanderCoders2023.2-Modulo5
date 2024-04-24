@@ -24,12 +24,12 @@ export class BookCardComponent implements OnInit {
 
   //É a primeira função executada por trás dos panos em Agnular, usado para instanciar diversas funções
   ngOnInit(){
-    console.log(this.book);
+    // console.log(this.book);
   }
 
   addToShoppingCart(){
     this.addBookToCart.emit(); //4°Passo
-    console.log("Book Added to Cart")
+    // console.log("Book Added to Cart")
   }
 
 }

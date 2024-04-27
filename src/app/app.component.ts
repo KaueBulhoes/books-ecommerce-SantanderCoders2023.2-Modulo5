@@ -7,12 +7,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { BooksCartComponent } from './components/books-cart/books-cart.component';
 import { MatIconModule } from '@angular/material/icon';
 import { IBook } from './interfaces/book.interface';
+import { BookCreateComponent } from './pages/book-create/book-create.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, BooksCatalogComponent, MatSidenavModule, BooksCartComponent, MatIconModule],
+  imports: [RouterOutlet, HeaderComponent, BooksCatalogComponent, MatSidenavModule, BooksCartComponent, MatIconModule, BookCreateComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
     this.addedBooksList = JSON.parse(localStorage.getItem("addedBooksList") || "[]");
   }
 
+  //Função passada para book-card para o carrinho funcionar
   findOrAddBook(book: IBook) {
     for (let i = 0; i < this.addedBooksList.length; i++) {
       if (book.id === this.addedBooksList[i].id) {

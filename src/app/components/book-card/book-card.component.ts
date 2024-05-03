@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { IBook } from '../../interfaces/book.interface';
 import { NgIf } from '@angular/common';
+import { BooksCartService } from '../../services/books-cart.service';
 
 @Component({
   selector: 'app-book-card',
@@ -19,37 +20,22 @@ export class BookCardComponent implements OnInit {
 
   addedBooksList: IBook[] = [];
 
-  // constructor(){
-  //   //console.log(this.book); //resultado será undefined
-  //   //para fazer o console.log não pode fazer dentro do construtor
-  // }
+  constructor(private booksCartService: BooksCartService){
+
+  }
 
   //É a primeira função executada por trás dos panos em Agnular, usado para instanciar diversas funções
   ngOnInit(){
     // console.log(this.book);
-    this.addedBooksList = JSON.parse(localStorage.getItem("addedBooksList") || "[]");
-  }
-
-  findOrAddBook(book?: IBook) {
-    for (let i = 0; i < this.addedBooksList.length; i++) {
-      if (book?.id === this.addedBooksList[i].id) {
-        this.addedBooksList[i].totalAddedToCart++;
-        return;
-      }
-    }
-
-    if(book) {
-      book.totalAddedToCart = 1;
-      this.addedBooksList.push(book);
-    }
+    this.addedBooksList = this.booksCartService.getAllBooks();
   }
 
   addToShoppingCart(){
     this.addBookToCart.emit(); //4°Passo
+
+    this.booksCartService.findOrAddBook(this.book);
     // console.log("Book Added to Cart")
-    this.findOrAddBook(this.book)
     
-    localStorage.setItem("addedBooksList", JSON.stringify(this.addedBooksList))
-  }
+    }
 
 }

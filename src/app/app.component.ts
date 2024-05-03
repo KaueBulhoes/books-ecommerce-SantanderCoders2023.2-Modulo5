@@ -18,7 +18,7 @@ import { BookCreateComponent } from './pages/book-create/book-create.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = "it's me you're looking for";
+  // title = "it's me you're looking for";
   addedBooksList: IBook[] = [];
 
   ngOnInit() {

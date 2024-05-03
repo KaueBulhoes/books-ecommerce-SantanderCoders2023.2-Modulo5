@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IBook } from '../interfaces/book.interface';
+import { v4 as uuidv4} from 'uuid';
 
 
 @Injectable({
@@ -16,13 +17,14 @@ export class BooksCatalogService {
     this.booksList = this.getAllBooks();
   }
 
-  booksList: IBook[] = []
+  booksList: IBook[] = [];
 
   getAllBooks() {
     return JSON.parse(localStorage.getItem("booksList") || "[]");
   }
 
   createBook(book: IBook) {
+    book.id = uuidv4();
     this.booksList.push(book);
     localStorage.setItem("booksList", JSON.stringify(this.booksList));
   }

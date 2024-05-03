@@ -36,9 +36,11 @@ export class BooksCartComponent implements OnInit {
 
   incrementTotalBookCopies(book: IBook) {
     this.booksCartService.incrementTotalBookCopies(book.id)
+    this.addedBooksList = this.booksCartService.getAllBooks();
   }
 
   decrementTotalBookCopies(book: IBook) {
     this.booksCartService.decrementTotalBookCopies(book.id)
+    this.addedBooksList = this.booksCartService.getAllBooks();
   }
 }

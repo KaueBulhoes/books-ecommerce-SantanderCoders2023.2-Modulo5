@@ -4,6 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { IBook } from '../../interfaces/book.interface';
 import { NgIf } from '@angular/common';
 import { BooksCartService } from '../../services/books-cart.service';
+import { BooksCartApiService } from '../../services/books-cart-api.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-book-card',
@@ -15,12 +17,13 @@ import { BooksCartService } from '../../services/books-cart.service';
 
 //implements é usado para implementar a função dentro do método
 export class BookCardComponent implements OnInit {
-  @Input() book ? : IBook;  //com a ? eu digo que essa propriedade pode ser IBook ou undefiened
-  @Output() addBookToCart: EventEmitter<void> = new EventEmitter; //1° passo
+  // @Input() book ? : IBook;  //com a ? eu digo que essa propriedade pode ser IBook ou undefiened
+  // @Output() addBookToCart: EventEmitter<void> = new EventEmitter; //1° passo
 
+  @Input() book?: IBook
   addedBooksList: IBook[] = [];
 
-  constructor(private booksCartService: BooksCartService){
+  constructor(private booksCartService: BooksCartService, private booksCartApiService: BooksCartApiService){
 
   }
 
@@ -31,9 +34,14 @@ export class BookCardComponent implements OnInit {
   }
 
   addToShoppingCart(){
-    this.addBookToCart.emit(); //4°Passo
+    this.booksCartApiService.createBook(this.book)
+    .subscribe((book) => {
+      console.log("dsgsedgds")
+    });
 
-    this.booksCartService.findOrAddBook(this.book);
+    // this.addBookToCart.emit(); //4°Passo
+
+    // this.booksCartService.findOrAddBook(this.book);
     // console.log("Book Added to Cart")
     
     }

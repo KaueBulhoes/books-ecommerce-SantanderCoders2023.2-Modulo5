@@ -3,7 +3,7 @@ import { IBook } from '../../interfaces/book.interface';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { BooksCartService } from '../../services/books-cart.service';
-
+import { BooksCartApiService } from '../../services/books-cart-api.service';
 
 
 @Component({
@@ -18,12 +18,18 @@ export class BooksCartComponent implements OnInit {
   addedBooksList: IBook[] = [];
   //(aqui virá um alias) a string de dentro será usada pra fazer o propery binding
 
-  constructor(private booksCartService: BooksCartService){
+  constructor(private booksCartService: BooksCartService, private booksCartApiService: BooksCartApiService){
 
   }
 
   ngOnInit(): void {
-    this.addedBooksList = this.booksCartService.getAllBooks();
+    const $addedBooksList = this.booksCartApiService.getAllBooks();
+    $addedBooksList.subscribe((addedBooksList) => {
+      this.addedBooksList = addedBooksList;
+    });
+
+    // this.addedBooksList = this.booksCartApiService.getAllBooks();
+    // this.addedBooksList = this.booksCartService.getAllBooks();
   }
 
   //função do ciclo de vida que é executado toda vez que alguma alteração é feita no componente

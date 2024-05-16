@@ -23,7 +23,7 @@ export class BooksCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const $addedBooksList = this.booksCartApiService.getAllBooks();
+    const $addedBooksList = this.booksCartApiService.booksList$;
     $addedBooksList.subscribe((addedBooksList) => {
       this.addedBooksList = addedBooksList;
     });
@@ -41,12 +41,14 @@ export class BooksCartComponent implements OnInit {
   // }
 
   incrementTotalBookCopies(book: IBook) {
-    this.booksCartService.incrementTotalBookCopies(book.id)
-    this.addedBooksList = this.booksCartService.getAllBooks();
+    this.booksCartApiService.incrementTotalBookCopies(book._id)
+    // this.booksCartService.incrementTotalBookCopies(book._id)
+    // this.addedBooksList = this.booksCartService.getAllBooks();
   }
 
   decrementTotalBookCopies(book: IBook) {
-    this.booksCartService.decrementTotalBookCopies(book.id)
-    this.addedBooksList = this.booksCartService.getAllBooks();
+    this.booksCartApiService.decrementTotalBookCopies(book._id)
+    // this.booksCartService.decrementTotalBookCopies(book._id)
+    // this.addedBooksList = this.booksCartService.getAllBooks();
   }
 }

@@ -34,10 +34,11 @@ export class BookCardComponent implements OnInit {
   }
 
   addToShoppingCart(){
-    this.booksCartApiService.createBook(this.book)
-    .subscribe((book) => {
-      console.log("dsgsedgds")
-    });
+    this.booksCartApiService.addOrUpdateBookFromCart(this.book)
+    // this.booksCartApiService.addBookToCart(this.book)
+    // .subscribe((book) => {
+    //   console.log("dsgsedgds")
+    // });
 
     // this.addBookToCart.emit(); //4°Passo
 

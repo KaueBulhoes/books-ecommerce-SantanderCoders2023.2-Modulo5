@@ -18,7 +18,7 @@ export class BooksCartService {
 
   findBookIndexByID(bookID: String) {
     const bookIndex = this.addedBooksList.findIndex((currBook) => {
-      return currBook.id === bookID;
+      return currBook._id === bookID;
     });
 
     return bookIndex;
@@ -27,7 +27,7 @@ export class BooksCartService {
   findOrAddBook(book?: IBook) {
     for (let i = 0; i < this.addedBooksList.length; i++) {
       const currBook = this.addedBooksList[i];
-      if (currBook?.id === this.addedBooksList[i].id) {
+      if (currBook?._id === this.addedBooksList[i]._id) {
         this.addedBooksList[i].totalAddedToCart++;
         localStorage.setItem("addedBooksList", JSON.stringify(this.addedBooksList))
         return;

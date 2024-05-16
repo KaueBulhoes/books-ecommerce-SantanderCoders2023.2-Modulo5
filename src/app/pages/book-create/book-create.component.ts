@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { IBook } from '../../interfaces/book.interface';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BooksCatalogService } from '../../services/books-catalog.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-book-create',
@@ -20,19 +21,26 @@ import { BooksCatalogService } from '../../services/books-catalog.service';
 })
 
 export class BookCreateComponent{
+    private bookId: string;
+    bookToUpdate?: IBook;
     booksList: IBook[] = [];
     bookForm: FormGroup;
 
     //Sempre uma classe for instaciada, irá rodar o construtor, passando o código abaixo ele irá rodar o construtor do service, e assim irá carregar a lista de livros.
-    constructor(private booksCatalogService: BooksCatalogService) {
+    constructor(private booksCatalogService: BooksCatalogService, private route: ActivatedRoute) {
+        this.bookId = this.route.snapshot.params["id"];
+
+        this.bookToUpdate = this.booksCatalogService.getBookById(this.bookId)
+
         this.bookForm = new FormGroup({
-            title: new FormControl(),
+            title: new FormControl( this.bookToUpdate?.title || "Título Padrão"),
             author: new FormControl(),
             description: new FormControl(),
             pullished_date: new FormControl(),
             price: new FormControl(),
             totalInStock: new FormControl()
         });
+        //snapshot vai retornar uma "foto" da rota
     }
 
     // changeTitleValue(event: Event){

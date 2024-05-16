@@ -1,5 +1,5 @@
 <mat-list>
-    @for(book of addedBooksList; track book.id){
+    @for(book of addedBooksList; track book._id){
     <div class="flex">
         <mat-list-item>
             <p>{{book.title}} | {{book.totalAddedToCart}} </p>

@@ -34,11 +34,11 @@ export class BookCreateComponent{
 
         this.bookForm = new FormGroup({
             title: new FormControl( this.bookToUpdate?.title || "Título Padrão"),
-            author: new FormControl(),
-            description: new FormControl(),
-            pullished_date: new FormControl(),
-            price: new FormControl(),
-            totalInStock: new FormControl()
+            author: new FormControl(this.bookToUpdate?.author),
+            description: new FormControl(this.bookToUpdate?.description),
+            pullished_date: new FormControl(this.bookToUpdate?.pullished_date),
+            price: new FormControl(this.bookToUpdate?.price),
+            totalInStock: new FormControl(this.bookToUpdate?.totalInStock)
         });
         //snapshot vai retornar uma "foto" da rota
     }

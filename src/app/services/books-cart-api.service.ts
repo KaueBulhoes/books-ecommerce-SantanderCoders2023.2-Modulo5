@@ -19,21 +19,9 @@ export class BooksCartApiService {
 
   getAllBooks() {
     return this.http.get<IBook[]>(this.API_URL).subscribe((books: IBook[]) => {
+      //Next significa que será o próximo valor a ser guardado, é a atualização que o BehaviorSubject traz
       this.booksSubject.next(books);
     });
-  }
-
-  getBookByCatalogId(bookId: String) {
-    //pipe é um modificador da chamada
-    return this.http.get<IBook[]>(`${this.API_URL}`).pipe(
-      filter((books: IBook[]) => {
-        for (let book of books) {
-          if (book.catalog_id == bookId) return true;
-        }
-        return false
-      }),
-      map((books: IBook[]) => books[0])
-    );
   }
 
   getBookById(bookId: String) {
@@ -41,30 +29,58 @@ export class BooksCartApiService {
     return this.http.get<IBook>(`${this.API_URL}/${bookId}`);
   }
 
+  getBookByCatalogId(bookId: String) {
+    //pipe é um modificador da chamada
+    return this.http.get<IBook[]>(`${this.API_URL}`).pipe(
+      // filter((books: IBook[]) => {
+      //   for (let book of books) {
+      //     if (book.catalog_id == bookId) return true;
+      //   }
+      //   return false
+      // }),
+      map((books: IBook[]) => {
+        const foundBook = books.find(book => book.catalog_id === bookId);
+        return foundBook ?? undefined;
+      })
+    );
+  }
+
   addOrUpdateBookFromCart(book?: IBook) {
+    console.log(book);
     if (!book) return;
 
     this.getBookByCatalogId(book._id)
-      .subscribe({
-        next: (book: IBook) => {
-          book.totalAddedToCart = (book.totalAddedToCart < book.totalInStock ? book.totalAddedToCart++ : book.totalInStock);
-          this.updateBookOnCart(book).subscribe(() => {
+      .subscribe((foundBook?: IBook) => {
+        console.log(foundBook);
+        if (!foundBook) {
+          book.totalAddedToCart = 1;
+          this.addBookToCart(book).subscribe((book: IBook) => {
             const booksList = this.booksSubject.getValue();
-            const index = booksList.findIndex((b) => b._id == book._id)
-            booksList[index] = book;
-            
-            this.booksSubject.next(booksList); //Att os booksSubject e avise a todos que estiverem observando
-            console.log("Att do total de livros no carrinho feita com sucesso");
+            booksList.push(book);
+            this.booksSubject.next(booksList);
           });
-          // error: (error) => console.log(error) 
+          return;
         }
-      })
+
+        foundBook.totalAddedToCart = (foundBook.totalAddedToCart < foundBook.totalInStock)? foundBook.totalAddedToCart + 1 : foundBook.totalAddedToCart;
+        this.updateBookOnCart(foundBook).subscribe(() => {
+          const booksList = this.booksSubject.getValue();
+          const index = booksList.findIndex((b) => b._id == foundBook._id);
+          booksList[index] = foundBook;
+
+          this.booksSubject.next(booksList); // atualiza o SUBJECT e avisa a geral que ta olhando pra ele
+          console.log("Atualização do total de livros no carrinho feita com sucesso");
+        });
+      });
   }
 
-  addBookToCart(book?: IBook) {
+  addBookToCart(book: IBook) {
+    const { _id: bookId, ...bookNoId } = book;
+    bookNoId.catalog_id = bookId;
+
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post(this.API_URL, book, { headers });
+    return this.http.post<IBook>(this.API_URL, bookNoId, { headers });
   }
 
   updateBookOnCart(book: IBook) {

@@ -18,7 +18,10 @@ export class BooksCartComponent implements OnInit {
   addedBooksList: IBook[] = [];
   //(aqui virá um alias) a string de dentro será usada pra fazer o propery binding
 
-  constructor(private booksCartService: BooksCartService, private booksCartApiService: BooksCartApiService){
+  constructor(
+    private booksCartService: BooksCartService, 
+    private booksCartApiService: BooksCartApiService
+  ){
 
   }
 

@@ -5,7 +5,8 @@ import { IBook } from '../../interfaces/book.interface';
 import { NgIf } from '@angular/common';
 import { BooksCartService } from '../../services/books-cart.service';
 import { BooksCartApiService } from '../../services/books-cart-api.service';
-import { HttpHeaders } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-book-card',
@@ -23,7 +24,11 @@ export class BookCardComponent implements OnInit {
   @Input() book?: IBook
   addedBooksList: IBook[] = [];
 
-  constructor(private booksCartService: BooksCartService, private booksCartApiService: BooksCartApiService){
+  constructor(
+    private booksCartService: BooksCartService, 
+    private booksCartApiService: BooksCartApiService,
+    private dialog: MatDialog
+  ){
 
   }
 
@@ -45,6 +50,12 @@ export class BookCardComponent implements OnInit {
     // this.booksCartService.findOrAddBook(this.book);
     // console.log("Book Added to Cart")
     
+    }
+
+    removeFromCatalog() {
+      this.dialog.open(DeleteDialogComponent, {
+        data: { bookId: this.book?._id }
+      });
     }
 
 }

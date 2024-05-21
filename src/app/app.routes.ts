@@ -19,5 +19,6 @@ export const routes: Routes = [
     { path: 'books/update/:id', component: BookCreateComponent, canActivate: [authGuard] },
     { path: 'login', component: LoginComponent },
     { path: '', redirectTo: "books", pathMatch: "full" },
+    // ** seria uma espécie de rota coringa, qualquer rota não achada será redirecionado para page not found
     { path: "**", component: PageNotFoundComponent },
 ];

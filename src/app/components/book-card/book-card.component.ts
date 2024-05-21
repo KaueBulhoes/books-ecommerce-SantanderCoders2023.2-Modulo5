@@ -8,6 +8,8 @@ import { BooksCartApiService } from '../../services/books-cart-api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { IUser } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-book-card',
@@ -23,13 +25,19 @@ export class BookCardComponent implements OnInit {
   // @Output() addBookToCart: EventEmitter<void> = new EventEmitter; //1° passo
 
   @Input() book?: IBook
+  loggedUser: IUser | null = null;
   addedBooksList: IBook[] = [];
 
   constructor(
     private booksCartService: BooksCartService, 
+    private authService: AuthService,
     private booksCartApiService: BooksCartApiService,
     private dialog: MatDialog
   ){
+
+    this.authService.loggedUser$.subscribe((user: IUser | null) => {
+      this.loggedUser = user;
+    });
 
   }
 

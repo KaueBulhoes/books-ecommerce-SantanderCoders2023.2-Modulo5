@@ -7,10 +7,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  //loggedUser: IUser;
   private loggedUserSubject = new BehaviorSubject<IUser | null>(null);
   loggedUser$ = this.loggedUserSubject.asObservable();
 
   constructor(private router: Router) {
+    //this.loggedUser = JSON.parse(localStorage.getItem("loggedUser" || "{}"));
     this.loggedUserSubject.next(this.getLoggedUser());
   }
 

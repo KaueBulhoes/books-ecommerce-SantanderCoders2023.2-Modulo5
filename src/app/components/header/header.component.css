@@ -1,4 +1,9 @@
-.header-space{
+.header-space {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigation {
     display: flex;
     justify-content: space-between;
 }

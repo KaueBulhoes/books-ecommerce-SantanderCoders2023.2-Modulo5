@@ -14,6 +14,7 @@ export class BooksCatalogService {
   //Dessa form, traremos tudo de manipulação de array do BooksCatalog para cá
   constructor() {
     //Quando era adicionado um livro novo, o novo livro sobrescrevia. Foi adicionado a linha abaixo para puxar a lista sempre.
+    console.log("Eu estou sendo executado!");
     this.booksList = this.getAllBooks();
   }
 

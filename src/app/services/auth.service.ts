@@ -24,6 +24,7 @@ export class AuthService {
     if (user.email == "admin@admin.com" && user.password == "admin123") {
       localStorage.setItem("loggedUser", JSON.stringify(user));
       this.loggedUserSubject.next(this.getLoggedUser());
+      // se usar / e o nome de onde eu quero ir, o Angular irá concatenar no endereço que já tenho, se não for utilizado será redirecionado para o escrito
       this.router.navigate(['books']);
       return true;
     }
@@ -33,6 +34,7 @@ export class AuthService {
   logoutUser() {
     localStorage.removeItem("loggedUser");
     this.loggedUserSubject.next(null);
+    //Navigate para redirecionar de volta para o login ao realizar o logout
     this.router.navigate(['login']);
   }
 

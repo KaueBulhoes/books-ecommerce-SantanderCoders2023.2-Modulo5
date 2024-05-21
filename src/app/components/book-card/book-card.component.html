@@ -30,6 +30,7 @@
         </mat-card-content>
         <mat-card-actions>
             <button mat-button color="primary" (click)="addToShoppingCart()">COMPRAR</button>
+            <!-- O botão de remover só irá aparecer se tiver usuário logado -->
             @if (loggedUser) {
                 <button mat-button color="warn" (click)="removeFromCatalog()">REMOVER</button>
               }

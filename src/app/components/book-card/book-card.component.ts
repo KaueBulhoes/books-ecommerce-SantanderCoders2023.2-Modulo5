@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
 import { IBook } from '../../interfaces/book.interface';
-import { NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe, NgIf } from '@angular/common';
 import { BooksCartService } from '../../services/books-cart.service';
 import { BooksCartApiService } from '../../services/books-cart-api.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,11 +10,13 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { IUser } from '../../interfaces/user.interface';
+import { CitationPipe } from '../../pipes/citation.pipe';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-book-card',
   standalone: true,
-  imports: [NgIf, MatCardModule, RouterModule],
+  imports: [ NgIf, MatCardModule, MatButtonModule, RouterModule, DatePipe, CurrencyPipe, CitationPipe ],
   templateUrl: './book-card.component.html',
   styleUrl: './book-card.component.css'
 })

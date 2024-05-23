@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IBook } from '../interfaces/book.interface';
-import { BehaviorSubject, filter, map } from 'rxjs';
+import { BehaviorSubject, delay, filter, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ export class BooksCartApiService {
   //Esse é o cara que avisa sobre as mudanças na api
   private booksSubject = new BehaviorSubject<IBook[]>([]);
   //Estou dizendo que booksList$ é observável
-  booksList$ = this.booksSubject.asObservable();
-  API_URL: string = "https://crudcrud.com/api/ae30e21eacf44153b513f374a77fe0ef/cart";
+  booksList$ = this.booksSubject.asObservable().pipe(delay(7000));
+  API_URL: string = "https://crudcrud.com/api/221e73e74e4e4a4eade6065e9b2d1436/cart";
 
   constructor(private http: HttpClient) {
     this.getAllBooks();

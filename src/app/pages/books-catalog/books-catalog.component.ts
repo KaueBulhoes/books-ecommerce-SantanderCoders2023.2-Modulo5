@@ -24,7 +24,7 @@ export class BooksCatalogComponent implements OnInit{
   constructor(private booksCatalogService: BooksCatalogService){  }
 
   ngOnInit(){
-    this.booksList = this.booksCatalogService.getAllBooks();
+    this.booksList = this.booksCatalogService.booksList();
   }
 
   warnAboutAddBookToCart(book: IBook){
